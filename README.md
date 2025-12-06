@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Literary Clock ⏰📖
 
-## Getting Started
+A beautiful desktop clock that tells time through literature. Each minute, discover a new quote from great novels, poems, and essays that mentions the current time.
 
-First, run the development server:
+![Literary Clock Screenshot](./screenshots/preview.png)
 
+## ✨ Features
+
+- **Time-based Quotes** - Every minute displays a literary quote mentioning the current time
+- **Atmospheric Themes** - Automatic theme transitions based on time of day:
+  - 🌅 Dawn (05:00-08:00) - Soft, warm awakening colors
+  - ☀️ Day (08:00-17:00) - Clean, focused reading atmosphere
+  - 🌆 Dusk (17:00-20:00) - Nostalgic sunset tones
+  - 🌙 Night (20:00-05:00) - Deep, calm midnight mode
+- **Frameless Design** - Minimalist borderless window
+- **Cross-platform** - Available for Windows (macOS/Linux coming soon)
+
+## 📥 Download
+
+### Windows
+Download the latest release from [Releases](../../releases):
+- **`.msi`** - Installer (recommended)
+- **`.exe`** - Portable executable
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js 18+
+- Rust 1.70+
+- npm or pnpm
+
+### Setup
 ```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/literary-clock.git
+cd literary-clock
+
+# Install dependencies
+npm install
+
+# Run in development mode (web)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Run in development mode (desktop)
+npx tauri dev
+
+# Build for production
+npx tauri build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tech Stack
+- **Frontend**: Next.js 16, React 19, TailwindCSS 4
+- **Desktop**: Tauri 2.0
+- **Animation**: Framer Motion
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+literary-clock/
+├── src/
+│   ├── app/           # Next.js app router
+│   ├── components/    # React components
+│   ├── data/          # Quote database
+│   └── hooks/         # Custom React hooks
+├── src-tauri/         # Tauri (Rust) backend
+│   ├── capabilities/  # Permission configuration
+│   └── tauri.conf.json
+└── public/            # Static assets
+```
 
-## Learn More
+## 📜 License
 
-To learn more about Next.js, take a look at the following resources:
+MIT License - feel free to use and modify!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🙏 Acknowledgments
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Quote collection inspired by [The Literary Clock](http://www.literaryclock.com/)
+- Built with [Tauri](https://tauri.app/) and [Next.js](https://nextjs.org/)
