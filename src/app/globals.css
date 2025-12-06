@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* ============================================
+   🌅 ATMOSPHERIC TIME PHASES
+   ============================================ */
+
+/* DAY (08:00-17:00) - Focus, Clean Paper */
+:root,
+[data-phase="day"] {
+  --background: #fcfbf9;
+  --background-gradient: linear-gradient(180deg, #fcfbf9 0%, #f5f3ef 100%);
+  --foreground: #2d2d2d;
+  --accent: #c9a959;
+  --accent-light: #d4b96a;
+  --muted: #666666;
+  --muted-light: #aaaaaa;
+  --texture-opacity: 0.035;
+}
+
+/* DAWN (05:00-08:00) - Awakening, Misty Morning */
+[data-phase="dawn"] {
+  --background: #f0ebe6;
+  --background-gradient: linear-gradient(180deg, #e8e4df 0%, #f5ebe0 50%, #fae5d3 100%);
+  --foreground: #3d3d3d;
+  --accent: #d4a574;
+  --accent-light: #e5b896;
+  --muted: #7a7a7a;
+  --muted-light: #b0a090;
+  --texture-opacity: 0.025;
+}
+
+/* DUSK (17:00-20:00) - Nostalgia, Warm Sunset */
+[data-phase="dusk"] {
+  --background: #f0e6e0;
+  --background-gradient: linear-gradient(180deg, #e8ddd5 0%, #f0dcd0 50%, #e5d0c5 100%);
+  --foreground: #2d2a28;
+  --accent: #c98f6a;
+  --accent-light: #d4a080;
+  --muted: #8a7a70;
+  --muted-light: #c0a090;
+  --texture-opacity: 0.03;
+}
+
+/* NIGHT (20:00-05:00) - Solitude, Deep Midnight */
+[data-phase="night"] {
+  --background: #151518;
+  --background-gradient: linear-gradient(180deg, #12121a 0%, #1a1a20 50%, #151518 100%);
+  --foreground: #e0e0e0;
+  --accent: #d4b96a;
+  --accent-light: #e5ca7b;
+  --muted: #909090;
+  --muted-light: #505050;
+  --texture-opacity: 0.015;
+}
+
+/* ============================================
+   Tailwind Theme Tokens
+   ============================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-current-bg: var(--background);
+  --color-current-text: var(--foreground);
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-mono: ui-monospace, monospace;
+}
+
+/* ============================================
+   Base Styles with Smooth Transitions
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background-gradient, var(--background));
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  /* SMOOTH 3s TRANSITION for atmospheric changes */
+  transition: background 3s ease-in-out, color 1s ease-in-out;
+}
+
+/* ============================================
+   Paper Texture Overlay
+   ============================================ */
+.paper-texture {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--texture-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  transition: opacity 3s ease-in-out;
+}
+
+[data-phase="night"] .paper-texture {
+  mix-blend-mode: soft-light;
+}
+
+.paper-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* ============================================
+   Font Utilities
+   ============================================ */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* ============================================
+   Selection Styling
+   ============================================ */
+::selection {
+  background: rgba(201, 169, 89, 0.3);
+  color: var(--foreground);
+}
+
+/* ============================================
+   Custom Utility Classes
+   ============================================ */
+.text-muted {
+  color: var(--muted);
+}
+
+.text-muted-light {
+  color: var(--muted-light);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+/* Gold gradient for time highlights - CINEMATIC EMPHASIS */
+.time-highlight {
+  position: relative;
+  display: inline;
+  font-weight: 600;
+  color: var(--foreground);
+  text-shadow: 0 0 40px rgba(201, 169, 89, 0.15);
+}
+
+.time-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0.05em;
+  left: -0.02em;
+  right: -0.02em;
+  height: 0.12em;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 999px;
+  opacity: 0.9;
+}
+
+[data-phase="night"] .time-highlight {
+  text-shadow: 0 0 60px rgba(212, 185, 106, 0.25);
+}
+
+/* ============================================
+   Animation Utilities
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   Fullscreen Mode Enhancements
+   ============================================ */
+:fullscreen {
+  background: var(--background-gradient, var(--background));
+}
